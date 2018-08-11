@@ -5,6 +5,7 @@ import { Header } from './components/common'
 import LoginForm from './components/LoginForm'
 
 class App extends Component {
+  state = { loggedIn: false }
   componentWillMount() {
     firebase.initializeApp({
       apiKey: 'AIzaSyDCndHrdvb8Ql3ANhyhGM0WRvy0xNH6nrA',
@@ -13,6 +14,10 @@ class App extends Component {
       projectId: 'auth-499c9',
       storageBucket: 'auth-499c9.appspot.com',
       messagingSenderId: '258730448436',
+    })
+
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ loggedIn: Boolean(user) })
     })
   }
 
